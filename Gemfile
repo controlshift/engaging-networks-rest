@@ -6,4 +6,5 @@ group :development do
   gem 'rspec', '>= 0'
   gem 'juwelier', '~> 2.1.0'
   gem 'webmock', '~> 3.4'
+  gem 'faker', '~> 1.9'
 end

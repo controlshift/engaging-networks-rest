@@ -1,5 +1,6 @@
 require 'rspec'
 require 'webmock/rspec'
+require 'faker'
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 

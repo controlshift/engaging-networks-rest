@@ -31,6 +31,8 @@ Gem::Specification.new do |s|
     "engaging-networks-rest.gemspec",
     "lib/engaging_networks_rest.rb",
     "lib/engaging_networks_rest/client.rb",
+    "lib/engaging_networks_rest/client/pages.rb",
+    "spec/client/pages_spec.rb",
     "spec/client_spec.rb",
     "spec/spec_helper.rb"
   ]
@@ -47,17 +49,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
       s.add_development_dependency(%q<webmock>.freeze, ["~> 3.4"])
+      s.add_development_dependency(%q<faker>.freeze, ["~> 1.9"])
     else
       s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
       s.add_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
       s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
+      s.add_dependency(%q<faker>.freeze, ["~> 1.9"])
     end
   else
     s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
     s.add_dependency(%q<rspec>.freeze, [">= 0"])
     s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
     s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
+    s.add_dependency(%q<faker>.freeze, ["~> 1.9"])
   end
 end
 
