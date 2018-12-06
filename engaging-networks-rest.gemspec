@@ -29,7 +29,10 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "engaging-networks-rest.gemspec",
-    "lib/engaging_networks_rest.rb"
+    "lib/engaging_networks_rest.rb",
+    "lib/engaging_networks_rest/client.rb",
+    "spec/client_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/controlshift/engaging-networks-rest".freeze
   s.licenses = ["MIT".freeze]
@@ -40,15 +43,21 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<faraday>.freeze, ["~> 0.15"])
       s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
+      s.add_development_dependency(%q<webmock>.freeze, ["~> 3.4"])
     else
+      s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
       s.add_dependency(%q<rspec>.freeze, [">= 0"])
       s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
+      s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
     end
   else
+    s.add_dependency(%q<faraday>.freeze, ["~> 0.15"])
     s.add_dependency(%q<rspec>.freeze, [">= 0"])
     s.add_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
+    s.add_dependency(%q<webmock>.freeze, ["~> 3.4"])
   end
 end
 
