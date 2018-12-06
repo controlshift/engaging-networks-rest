@@ -28,7 +28,8 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "lib/engaging-networks-rest.rb"
+    "engaging-networks-rest.gemspec",
+    "lib/engaging_networks_rest.rb"
   ]
   s.homepage = "http://github.com/controlshift/engaging-networks-rest".freeze
   s.licenses = ["MIT".freeze]
