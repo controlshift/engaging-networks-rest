@@ -28,6 +28,10 @@ module EngagingNetworksRest
       !ens_auth_key.nil?
     end
 
+    def get(path:, params: {})
+      request(method: :get, path: path, params: params)
+    end
+
     def post(path:, body: {})
       request(method: :post, path: path, body: body)
     end
