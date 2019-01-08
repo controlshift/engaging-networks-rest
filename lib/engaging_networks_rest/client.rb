@@ -1,5 +1,5 @@
 require 'faraday'
-
+require 'json'
 require 'engaging_networks_rest/client/pages'
 
 module EngagingNetworksRest
@@ -21,7 +21,8 @@ module EngagingNetworksRest
         req.body = api_key
       end
 
-      @ens_auth_key = response.body
+      parsed_body = JSON.parse(response.body)
+      @ens_auth_key = parsed_body['ens-auth-token']
     end
 
     def authenticated?
