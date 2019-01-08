@@ -10,8 +10,12 @@ module EngagingNetworksRest
         get(path: "/ens/service/page", params: filter_params)
       end
 
-      def process_page_request(page_id:, body:)
-        post(path: "/ens/service/page/#{page_id}/process", body: body)
+      def page(page_id:)
+        get(path: "/ens/service/page/#{page_id}")
+      end
+
+      def process_page_request(page_id:, supporter_data:)
+        post(path: "/ens/service/page/#{page_id}/process", body: {supporter: supporter_data})
       end
     end
   end
