@@ -13,6 +13,10 @@ def instrument_connection_with_extended_logging(client)
   }
 
   faraday_builder = ->(faraday) do
+    faraday.request :json
+    faraday.response :json, :content_type => /\bjson$/
+    faraday.use Faraday::Response::Logger if ENV['DEBUG']
+    faraday.use  EngagingNetworksRest::Response::RaiseError
     faraday.response :detailed_logger
     faraday.adapter Faraday.default_adapter
   end
