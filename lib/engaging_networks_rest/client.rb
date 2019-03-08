@@ -1,6 +1,7 @@
 require 'faraday'
-require 'json'
+require 'faraday_middleware'
 require 'engaging_networks_rest/client/pages'
+require 'engaging_networks_rest/response/raise_error'
 
 module EngagingNetworksRest
   class Client
@@ -11,18 +12,25 @@ module EngagingNetworksRest
     def initialize(api_key:)
       @api_key = api_key
 
-      @connection = Faraday.new(url: "https://#{ENS_DOMAIN}")
+      @connection = Faraday.new(url: "https://#{ENS_DOMAIN}") do |conn|
+        conn.request :json
+        conn.response :json, :content_type => /\bjson$/
+
+        conn.use Faraday::Response::Logger if ENV['DEBUG']
+        conn.use EngagingNetworksRest::Response::RaiseError
+
+        conn.adapter :net_http
+      end
     end
 
     def authenticate!
       response = connection.post do |req|
-        req.url '/ens/service/authenticate'
         req.headers['Content-Type'] = 'application/json'
+        req.url '/ens/service/authenticate'
         req.body = api_key
       end
 
-      parsed_body = JSON.parse(response.body)
-      @ens_auth_key = parsed_body['ens-auth-token']
+      @ens_auth_key = response.body['ens-auth-token']
     end
 
     def authenticated?
@@ -47,14 +55,14 @@ module EngagingNetworksRest
       end
 
       response = connection.send(method) do |req|
+        req.headers['Content-Type'] = 'application/json'
         req.path = path
         req.params = params
-        req.headers['Content-Type'] = 'application/json'
         req.headers['ens-auth-token'] = ens_auth_key
         req.body = ::JSON.generate(body) unless body.empty?
       end
 
-      JSON.parse(response.body)
+      response.body
     end
   end
 end

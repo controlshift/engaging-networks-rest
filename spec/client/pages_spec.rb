@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EngagingNetworksRest::Client::Pages do
   let(:api_key) { 'abc-123' }
   let(:ens_auth_key) { 'tmp-auth-key-456' }
-  let(:standard_headers) { {'Content-Type' => 'application/json', 'ens-auth-token' => ens_auth_key} }
+  let(:standard_headers) { {'Content-Type' => 'application/json', 'Ens-Auth-Token' => ens_auth_key} }
 
   subject { EngagingNetworksRest::Client.new(api_key: api_key) }
 
@@ -19,14 +19,14 @@ describe EngagingNetworksRest::Client::Pages do
     shared_examples_for 'list pages' do
       it 'should get pages' do
         stub_request(:get, pages_url).with(headers: standard_headers, query: {'type' => page_type, 'status' => page_status})
-          .to_return(body: response.to_json)
+          .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
 
         expect(subject.pages(type: page_type, status: page_status)).to eq response
       end
 
       it 'should omit status param if not specified' do
         stub_request(:get, pages_url).with(headers: standard_headers, query: {'type' => page_type})
-          .to_return(body: response.to_json)
+          .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
 
         expect(subject.pages(type: page_type)).to eq response
       end
@@ -59,11 +59,11 @@ describe EngagingNetworksRest::Client::Pages do
     let(:response) { {'id' => '1234567', 'status' => 'SUCCESS', 'supporterEmailAddress' => email, 'supporterId' => '98765'} }
 
     shared_examples_for 'process page request' do
-      it 'should process the page request' do
+      it 'should process the page request and return its ID' do
         stub_request(:post, page_req_url).with(body: {supporter: supporter_hash}.to_json, headers: standard_headers)
-          .to_return(body: response.to_json)
+          .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
 
-        expect(subject.process_page_request(page_id: page_id, body: {supporter: supporter_hash})).to eq response
+        expect(subject.process_page_request(page_id: page_id, supporter_data: supporter_hash)).to eq '1234567'
       end
     end
 
