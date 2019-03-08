@@ -26,11 +26,11 @@ Juwelier::Tasks.new do |gem|
 end
 Juwelier::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+require 'rspec/core/rake_task'
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
+  t.rspec_opts = '--color'
 end
 
 desc "Code coverage detail"
@@ -39,7 +39,8 @@ task :simplecov do
   Rake::Task['test'].execute
 end
 
-task :default => :test
+desc 'Default: run specs.'
+task :default => :spec
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
