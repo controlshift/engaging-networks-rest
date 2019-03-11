@@ -57,13 +57,25 @@ describe EngagingNetworksRest::Client::Pages do
     let(:email) { Faker::Internet.email }
     let(:supporter_hash) { {'firstName' => 'Joe', 'lastName' => 'Smith', 'emailAddress' => email, 'customField1' => 'foo'} }
     let(:response) { {'id' => '1234567', 'status' => 'SUCCESS', 'supporterEmailAddress' => email, 'supporterId' => '98765'} }
+    let(:failure_response) { {'status' => 'ERROR', 'message' => 'Something went wrong'} }
 
     shared_examples_for 'process page request' do
       it 'should process the page request and return its ID' do
         stub_request(:post, page_req_url).with(body: {supporter: supporter_hash}.to_json, headers: standard_headers)
           .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
 
-        expect(subject.process_page_request(page_id: page_id, supporter_data: supporter_hash)).to eq '1234567'
+        result = subject.process_page_request(page_id: page_id, supporter_data: supporter_hash)
+
+        expect(result['id']).to eq '1234567'
+        expect(result['supporterId']).to eq '98765'
+        expect(result['supporterEmailAddress']).to eq email
+      end
+
+      it 'should raise if response status is not SUCCESS' do
+        stub_request(:post, page_req_url).with(body: {supporter: supporter_hash}.to_json, headers: standard_headers)
+          .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: failure_response.to_json)
+
+        expect { subject.process_page_request(page_id: page_id, supporter_data: supporter_hash) }.to raise_error(RuntimeError, /Unexpected 'status' value on response.*Something went wrong/)
       end
     end
 
