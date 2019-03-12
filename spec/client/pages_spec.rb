@@ -60,6 +60,14 @@ describe EngagingNetworksRest::Client::Pages do
     let(:failure_response) { {'status' => 'ERROR', 'message' => 'Something went wrong'} }
 
     shared_examples_for 'process page request' do
+      it 'should send correct body for supporter and generic data' do
+        stub_request(:post, page_req_url)
+          .with(body: {'txn1' => 'foo', 'txn2' => 'bar', 'suppressAutoResponder' => true, supporter: { 'lastName' => 'Smith', 'emailAddress' => email }}.to_json, headers: standard_headers)
+          .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
+
+        result = subject.process_page_request(page_id: page_id, generic_data: { 'txn1' => 'foo', 'txn2' => 'bar', 'suppressAutoResponder' => true }, supporter_data: { 'lastName' => 'Smith', 'emailAddress' => email })
+      end
+
       it 'should process the page request and return its ID' do
         stub_request(:post, page_req_url).with(body: {supporter: supporter_hash}.to_json, headers: standard_headers)
           .to_return(status: '200', headers: {content_type: "application/json; charset=utf-8"}, body: response.to_json)
