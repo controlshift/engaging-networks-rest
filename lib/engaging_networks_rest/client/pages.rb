@@ -14,8 +14,8 @@ module EngagingNetworksRest
         get(path: "/ens/service/page/#{page_id}")
       end
 
-      def process_page_request(page_id:, supporter_data:)
-        response = post(path: "/ens/service/page/#{page_id}/process", body: {supporter: supporter_data})
+      def process_page_request(page_id:, supporter_data:, generic_data: {})
+        response = post(path: "/ens/service/page/#{page_id}/process", body: generic_data.merge(supporter: supporter_data))
         if response['status'] == 'SUCCESS'
           return response
         end
