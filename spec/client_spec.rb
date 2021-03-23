@@ -12,7 +12,7 @@ describe EngagingNetworksRest::Client do
     let(:auth_key_body) { "{\"ens-auth-token\":\"#{auth_key}\",\"expires\":3600000}" }
 
     before :each do
-      stub_request(:post, auth_url).with(body: api_key, headers: content_type_header).to_return(body: auth_key_body)
+      stub_request(:post, auth_url).with(body: api_key, headers: content_type_header).to_return(body: auth_key_body, headers: content_type_header)
     end
 
     it 'should set the ens_auth_key on the client' do
