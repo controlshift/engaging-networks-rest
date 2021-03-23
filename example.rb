@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 
 require 'engaging_networks_rest'
@@ -7,16 +9,16 @@ require 'byebug'
 def instrument_connection_with_extended_logging(client)
   default_options = {
     headers: {
-      'Accept' => "application/json;q=0.1",
-      'Accept-Charset' => "utf-8"
+      'Accept' => 'application/json;q=0.1',
+      'Accept-Charset' => 'utf-8'
     }
   }
 
-  faraday_builder = ->(faraday) do
+  faraday_builder = lambda do |faraday|
     faraday.request :json
-    faraday.response :json, :content_type => /\bjson$/
+    faraday.response :json, content_type: /\bjson$/
     faraday.use Faraday::Response::Logger if ENV['DEBUG']
-    faraday.use  EngagingNetworksRest::Response::RaiseError
+    faraday.use EngagingNetworksRest::Response::RaiseError
     faraday.response :detailed_logger
     faraday.adapter Faraday.default_adapter
   end
@@ -33,4 +35,4 @@ instrument_connection_with_extended_logging(client)
 
 byebug
 
-puts "Bye!"
+puts 'Bye!'

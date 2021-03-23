@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faraday'
 require 'faraday_middleware'
 require 'engaging_networks_rest/client/pages'
@@ -14,7 +16,7 @@ module EngagingNetworksRest
 
       @connection = Faraday.new(url: "https://#{ENS_DOMAIN}") do |conn|
         conn.request :json
-        conn.response :json, :content_type => /\bjson$/
+        conn.response :json, content_type: /\bjson$/
 
         conn.use Faraday::Response::Logger if ENV['DEBUG']
         conn.use EngagingNetworksRest::Response::RaiseError
@@ -50,9 +52,7 @@ module EngagingNetworksRest
     private
 
     def request(method:, path:, params: {}, body: {})
-      unless authenticated?
-        authenticate!
-      end
+      authenticate! unless authenticated?
 
       response = connection.send(method) do |req|
         req.headers['Content-Type'] = 'application/json'

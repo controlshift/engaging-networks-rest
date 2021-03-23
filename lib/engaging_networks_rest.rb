@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'engaging_networks_rest/client'
 
 module EngagingNetworksRest
