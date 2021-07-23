@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - 'engaging-networks-rest.gemspec'
+    - 'example.rb'
+    - 'vendor/**/*'
+
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false

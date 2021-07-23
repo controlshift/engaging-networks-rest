@@ -3,7 +3,9 @@
 module EngagingNetworksRest
   module Response
     class NotFound < StandardError; end
+
     class Unauthorized < StandardError; end
+
     class InternalError < StandardError; end
 
     class RaiseError < Faraday::Response::Middleware

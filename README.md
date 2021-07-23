@@ -1,6 +1,8 @@
 # engaging-networks-rest
 Client gem for the ENS API to Engaging Networks
 
+[![CI Status](https://github.com/controlshift/engaging-networks-rest/actions/workflows/ci.yml/badge.svg)](https://github.com/controlshift/engaging-networks-rest/actions/workflows/ci.yml)
+
 ## Install
 
 `gem install engaging-networks-rest`

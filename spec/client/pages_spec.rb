@@ -20,15 +20,21 @@ describe EngagingNetworksRest::Client::Pages do
 
     shared_examples_for 'list pages' do
       it 'should get pages' do
-        stub_request(:get, pages_url).with(headers: standard_headers, query: { 'type' => page_type, 'status' => page_status })
-                                     .to_return(status: '200', headers: { content_type: 'application/json; charset=utf-8' }, body: response.to_json)
+        stub_request(:get, pages_url)
+          .with(headers: standard_headers, query: { 'type' => page_type, 'status' => page_status })
+          .to_return(status: '200',
+                     headers: { content_type: 'application/json; charset=utf-8' },
+                     body: response.to_json)
 
         expect(subject.pages(type: page_type, status: page_status)).to eq response
       end
 
       it 'should omit status param if not specified' do
-        stub_request(:get, pages_url).with(headers: standard_headers, query: { 'type' => page_type })
-                                     .to_return(status: '200', headers: { content_type: 'application/json; charset=utf-8' }, body: response.to_json)
+        stub_request(:get, pages_url)
+          .with(headers: standard_headers, query: { 'type' => page_type })
+          .to_return(status: '200',
+                     headers: { content_type: 'application/json; charset=utf-8' },
+                     body: response.to_json)
 
         expect(subject.pages(type: page_type)).to eq response
       end
@@ -69,16 +75,25 @@ describe EngagingNetworksRest::Client::Pages do
       it 'should send correct body for supporter and generic data' do
         stub_request(:post, page_req_url)
           .with(body: { 'txn1' => 'foo', 'txn2' => 'bar', 'suppressAutoResponder' => true,
-                        supporter: { 'lastName' => 'Smith', 'emailAddress' => email } }.to_json, headers: standard_headers)
-          .to_return(status: '200', headers: { content_type: 'application/json; charset=utf-8' }, body: response.to_json)
+                        supporter: { 'lastName' => 'Smith', 'emailAddress' => email } }.to_json,
+                headers: standard_headers)
+          .to_return(status: '200',
+                     headers: { content_type: 'application/json; charset=utf-8' },
+                     body: response.to_json)
 
-        result = subject.process_page_request(page_id: page_id,
-                                              generic_data: { 'txn1' => 'foo', 'txn2' => 'bar', 'suppressAutoResponder' => true }, supporter_data: { 'lastName' => 'Smith', 'emailAddress' => email })
+        subject.process_page_request(page_id: page_id,
+                                     generic_data: { 'txn1' => 'foo',
+                                                     'txn2' => 'bar',
+                                                     'suppressAutoResponder' => true },
+                                     supporter_data: { 'lastName' => 'Smith', 'emailAddress' => email })
       end
 
       it 'should process the page request and return its ID' do
-        stub_request(:post, page_req_url).with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
-                                         .to_return(status: '200', headers: { content_type: 'application/json; charset=utf-8' }, body: response.to_json)
+        stub_request(:post, page_req_url)
+          .with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
+          .to_return(status: '200',
+                     headers: { content_type: 'application/json; charset=utf-8' },
+                     body: response.to_json)
 
         result = subject.process_page_request(page_id: page_id, supporter_data: supporter_hash)
 
@@ -88,8 +103,11 @@ describe EngagingNetworksRest::Client::Pages do
       end
 
       it 'should raise if response status is not SUCCESS' do
-        stub_request(:post, page_req_url).with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
-                                         .to_return(status: '200', headers: { content_type: 'application/json; charset=utf-8' }, body: failure_response.to_json)
+        stub_request(:post, page_req_url)
+          .with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
+          .to_return(status: '200',
+                     headers: { content_type: 'application/json; charset=utf-8' },
+                     body: failure_response.to_json)
 
         expect do
           subject.process_page_request(page_id: page_id,
