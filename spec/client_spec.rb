@@ -9,7 +9,6 @@ describe EngagingNetworksRest::Client do
   subject { EngagingNetworksRest::Client.new(api_key: api_key) }
 
   describe '#authenticate!' do
-    let(:auth_url) { "https://#{EngagingNetworksRest::Client::ENS_DOMAIN}/ens/service/authenticate" }
     let(:auth_key) { '75491e42-99dc-45ce-b637-a681bede875c' }
     let(:auth_key_body) { "{\"ens-auth-token\":\"#{auth_key}\",\"expires\":3600000}" }
 
@@ -19,10 +18,27 @@ describe EngagingNetworksRest::Client do
         .to_return(body: auth_key_body, headers: content_type_header)
     end
 
-    it 'should set the ens_auth_key on the client' do
-      subject.authenticate!
+    context 'with no host specified' do
+      let(:auth_url) { "https://#{EngagingNetworksRest::Client::ENS_DOMAIN}/ens/service/authenticate" }
 
-      expect(subject.ens_auth_key).to eq auth_key
+      it 'should set the ens_auth_key on the client' do
+        subject.authenticate!
+
+        expect(subject.ens_auth_key).to eq auth_key
+      end
+    end
+
+    context 'with a host specified' do
+      let(:host) { 'example.com' }
+      let(:auth_url) { "https://#{host}/ens/service/authenticate" }
+
+      subject { EngagingNetworksRest::Client.new(api_key: api_key, host: host) }
+
+      it 'should set the ens_auth_key on the client' do
+        subject.authenticate!
+
+        expect(subject.ens_auth_key).to eq auth_key
+      end
     end
   end
 end
