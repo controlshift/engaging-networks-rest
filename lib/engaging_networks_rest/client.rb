@@ -38,11 +38,11 @@ module EngagingNetworksRest
     end
 
     def get(path:, params: {})
-      request(method: :get, path: path, params: params)
+      request(method: :get, path:, params:)
     end
 
     def post(path:, body: {})
-      request(method: :post, path: path, body: body)
+      request(method: :post, path:, body:)
     end
 
     include EngagingNetworksRest::Client::Pages

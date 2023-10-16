@@ -8,7 +8,7 @@ describe EngagingNetworksRest::Client::Pages do
   let(:ens_auth_key) { 'tmp-auth-key-456' }
   let(:standard_headers) { { 'Content-Type' => 'application/json', 'Ens-Auth-Token' => ens_auth_key } }
 
-  subject { EngagingNetworksRest::Client.new(api_key: api_key, host: host) }
+  subject { EngagingNetworksRest::Client.new(api_key:, host:) }
 
   describe '#pages' do
     let(:page_type) { 'dcf' }
@@ -82,7 +82,7 @@ describe EngagingNetworksRest::Client::Pages do
                      headers: { content_type: 'application/json; charset=utf-8' },
                      body: response.to_json)
 
-        subject.process_page_request(page_id: page_id,
+        subject.process_page_request(page_id:,
                                      generic_data: { 'txn1' => 'foo',
                                                      'txn2' => 'bar',
                                                      'suppressAutoResponder' => true },
@@ -96,7 +96,7 @@ describe EngagingNetworksRest::Client::Pages do
                      headers: { content_type: 'application/json; charset=utf-8' },
                      body: response.to_json)
 
-        result = subject.process_page_request(page_id: page_id, supporter_data: supporter_hash)
+        result = subject.process_page_request(page_id:, supporter_data: supporter_hash)
 
         expect(result['id']).to eq '1234567'
         expect(result['supporterId']).to eq '98765'
@@ -111,7 +111,7 @@ describe EngagingNetworksRest::Client::Pages do
                      body: failure_response.to_json)
 
         expect do
-          subject.process_page_request(page_id: page_id,
+          subject.process_page_request(page_id:,
                                        supporter_data: supporter_hash)
         end.to raise_error(RuntimeError, /Unexpected 'status' value on response.*Something went wrong/)
       end

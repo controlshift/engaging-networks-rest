@@ -7,7 +7,7 @@ describe EngagingNetworksRest::Client do
   let(:api_key) { 'abc123' }
   let(:content_type_header) { { 'Content-Type' => 'application/json' } }
 
-  subject { EngagingNetworksRest::Client.new(api_key: api_key, host: host) }
+  subject { EngagingNetworksRest::Client.new(api_key:, host:) }
 
   describe '#authenticate!' do
     let(:auth_url) { "https://#{host}/ens/service/authenticate" }
