@@ -10,7 +10,6 @@ group :development do
   gem 'psych', '3.3.2'  # See https://github.com/faker-ruby/faker/issues/2330
 
   gem 'faraday-detailed_logger', '>= 2.1.2'
-  gem 'juwelier', git: 'https://github.com/flajann2/juwelier.git'
   gem 'pry-byebug', '> 3.6'
   gem 'rspec', '>= 0'
   gem 'rubocop'
