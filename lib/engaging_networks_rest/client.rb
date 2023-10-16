@@ -11,10 +11,10 @@ module EngagingNetworksRest
 
     ENS_DOMAIN = 'www.e-activist.com'
 
-    def initialize(api_key:)
+    def initialize(api_key:, host: ENS_DOMAIN)
       @api_key = api_key
 
-      @connection = Faraday.new(url: "https://#{ENS_DOMAIN}") do |conn|
+      @connection = Faraday.new(url: "https://#{host}") do |conn|
         conn.request :json
         conn.response :json, content_type: /\bjson$/
 
