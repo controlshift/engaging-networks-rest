@@ -10,7 +10,7 @@ Client gem for the ENS API to Engaging Networks
 ## Usage
 
 ```
-client = EngagingNetworksRest.new(api_key: 'YOUR API KEY HERE')
+client = EngagingNetworksRest.new(api_key: 'YOUR API KEY HERE', host: 'us.engagingnetworks.app')
 
 # get pages by type
 pages = client.pages(type: 'dcf', status: 'live')
