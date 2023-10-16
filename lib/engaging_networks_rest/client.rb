@@ -9,7 +9,7 @@ module EngagingNetworksRest
   class Client
     attr_reader :api_key, :connection, :ens_auth_key
 
-    ENS_DOMAIN = 'www.e-activist.com'
+    ENS_DOMAIN = 'ca.engagingnetworks.app'
 
     def initialize(api_key:, host: ENS_DOMAIN)
       @api_key = api_key
