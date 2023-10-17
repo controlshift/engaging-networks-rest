@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   # See https://github.com/faker-ruby/faker/issues/2330
   s.add_development_dependency(%q<psych>.freeze, ["= 3.3.2"])
   s.add_development_dependency(%q<faraday-detailed_logger>.freeze, [">= 2.1.2"])
-  s.add_development_dependency(%q<pry-byebug>.freeze, ["> 3.6"])
+  s.add_development_dependency(%q<debug>.freeze, ["> 0"])
   s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
   s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
   s.add_development_dependency(%q<webmock>.freeze, ["> 3.4"])
