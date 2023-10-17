@@ -3,16 +3,17 @@
 require 'spec_helper'
 
 describe EngagingNetworksRest::Client::Pages do
+  let(:host) { 'example.com' }
   let(:api_key) { 'abc-123' }
   let(:ens_auth_key) { 'tmp-auth-key-456' }
   let(:standard_headers) { { 'Content-Type' => 'application/json', 'Ens-Auth-Token' => ens_auth_key } }
 
-  subject { EngagingNetworksRest::Client.new(api_key: api_key) }
+  subject { EngagingNetworksRest::Client.new(api_key: api_key, host: host) }
 
   describe '#pages' do
     let(:page_type) { 'dcf' }
     let(:page_status) { 'live' }
-    let(:pages_url) { "https://#{EngagingNetworksRest::Client::ENS_DOMAIN}/ens/service/page" }
+    let(:pages_url) { "https://example.com/ens/service/page" }
 
     # The API docs don't actually say what this response looks like, so this is a guess.
     # Fortunately, it doesn't actually matter for our purposes, since we just return whatever JSON we get.
@@ -61,7 +62,7 @@ describe EngagingNetworksRest::Client::Pages do
 
   describe '#process_page_request' do
     let(:page_id) { 234 }
-    let(:page_req_url) { "https://#{EngagingNetworksRest::Client::ENS_DOMAIN}/ens/service/page/#{page_id}/process" }
+    let(:page_req_url) { "https://example.com/ens/service/page/#{page_id}/process" }
     let(:email) { Faker::Internet.email }
     let(:supporter_hash) do
       { 'firstName' => 'Joe', 'lastName' => 'Smith', 'emailAddress' => email, 'customField1' => 'foo' }
