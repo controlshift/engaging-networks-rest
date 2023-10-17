@@ -13,7 +13,7 @@ describe EngagingNetworksRest::Client::Pages do
   describe '#pages' do
     let(:page_type) { 'dcf' }
     let(:page_status) { 'live' }
-    let(:pages_url) { "https://example.com/ens/service/page" }
+    let(:pages_url) { 'https://example.com/ens/service/page' }
 
     # The API docs don't actually say what this response looks like, so this is a guess.
     # Fortunately, it doesn't actually matter for our purposes, since we just return whatever JSON we get.
