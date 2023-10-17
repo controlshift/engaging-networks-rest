@@ -33,9 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<faraday>.freeze, [">= 1.0"])
   s.add_runtime_dependency(%q<faraday_middleware>.freeze, [">= 0"])
 
-  s.add_development_dependency(%q<faker>.freeze, ["> 1.9"])
-  # See https://github.com/faker-ruby/faker/issues/2330
-  s.add_development_dependency(%q<psych>.freeze, ["= 3.3.2"])
+  s.add_development_dependency(%q<faker>.freeze, ["> 2.20.0"])
   s.add_development_dependency(%q<faraday-detailed_logger>.freeze, [">= 2.1.2"])
   s.add_development_dependency(%q<debug>.freeze, ["> 0"])
   s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
