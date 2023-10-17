@@ -9,9 +9,7 @@ module EngagingNetworksRest
   class Client
     attr_reader :api_key, :connection, :ens_auth_key
 
-    ENS_DOMAIN = 'www.e-activist.com'
-
-    def initialize(api_key:, host: ENS_DOMAIN)
+    def initialize(api_key:, host:)
       @api_key = api_key
 
       @connection = Faraday.new(url: "https://#{host}") do |conn|
