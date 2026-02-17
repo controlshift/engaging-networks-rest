@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
 require 'engaging_networks_rest/client/pages'
 require 'engaging_networks_rest/response/raise_error'
 

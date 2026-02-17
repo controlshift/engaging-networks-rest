@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0] - 2026-02-11
+
+### Added
+- Ruby 4.0+ support by updating required_ruby_version to >= 3.0.0
+- Explicit Faraday 2.x dependency constraints
+
+### Changed
+- Upgraded from Ruby 3.1.4 to Ruby 4.0.1
+- Updated middleware inheritance from `Faraday::Response::Middleware` to `Faraday::Middleware`
+- Simplified Rakefile to use standard bundler gem tasks
+
+### Dependencies
+- Updated `faraday` from `>= 1.0` to `~> 2.0`
+- Added `rake ~> 13.0` as runtime dependency
+- Removed `faraday_middleware` dependency (not needed with Faraday 2.x)
+
+### Removed
+- Removed `require 'faraday_middleware'` (no longer needed)
+
 ## [1.0.0] - 2023-10-17
 
 ### BREAKING CHANGES

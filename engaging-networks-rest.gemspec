@@ -30,8 +30,10 @@ Gem::Specification.new do |s|
     s.specification_version = 4
   end
 
-  s.add_runtime_dependency(%q<faraday>.freeze, [">= 1.0"])
-  s.add_runtime_dependency(%q<faraday_middleware>.freeze, [">= 0"])
+  s.required_ruby_version = '>= 3.0.0'
+  
+  s.add_runtime_dependency(%q<faraday>.freeze, ["~> 2.0"])
+  s.add_runtime_dependency(%q<rake>.freeze, ["~> 13.0"])
 
   s.add_development_dependency(%q<faker>.freeze, ["> 2.20.0"])
   s.add_development_dependency(%q<faraday-detailed_logger>.freeze, [">= 2.1.2"])
