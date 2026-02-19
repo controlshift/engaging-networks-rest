@@ -1,5 +1,4 @@
 AllCops:
-  TargetRubyVersion: 4.0
   Exclude:
     - 'engaging-networks-rest.gemspec'
     - 'example.rb'
