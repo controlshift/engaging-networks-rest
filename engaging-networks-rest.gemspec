@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "engaging-networks-rest".freeze
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
@@ -30,15 +30,15 @@ Gem::Specification.new do |s|
     s.specification_version = 4
   end
 
-  s.required_ruby_version = '>= 3.0.0'
+  s.required_ruby_version = ['>= 3.3', '< 5.0']
   
   s.add_runtime_dependency(%q<faraday>.freeze, ["~> 2.0"])
-  s.add_runtime_dependency(%q<rake>.freeze, ["~> 13.0"])
 
-  s.add_development_dependency(%q<faker>.freeze, ["> 2.20.0"])
-  s.add_development_dependency(%q<faraday-detailed_logger>.freeze, [">= 2.1.2"])
-  s.add_development_dependency(%q<debug>.freeze, ["> 0"])
-  s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
-  s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
-  s.add_development_dependency(%q<webmock>.freeze, ["> 3.4"])
+  s.add_development_dependency(%q<rake>.freeze, ["~> 13.0"])
+  s.add_development_dependency(%q<faker>.freeze, ["~> 3.0"])
+  s.add_development_dependency(%q<faraday-detailed_logger>.freeze, ["~> 2.0"])
+  s.add_development_dependency(%q<debug>.freeze, ["~> 1.0"])
+  s.add_development_dependency(%q<rspec>.freeze, ["~> 3.0"])
+  s.add_development_dependency(%q<rubocop>.freeze, ["~> 1.0"])
+  s.add_development_dependency(%q<webmock>.freeze, ["~> 3.0"])
 end
