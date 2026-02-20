@@ -52,11 +52,10 @@ module EngagingNetworksRest
       authenticate! unless authenticated?
 
       response = connection.send(method) do |req|
-        req.headers['Content-Type'] = 'application/json'
         req.path = path
         req.params = params
         req.headers['ens-auth-token'] = ens_auth_key
-        req.body = ::JSON.generate(body) unless body.empty?
+        req.body = body unless body.empty?
       end
 
       response.body

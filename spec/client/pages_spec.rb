@@ -6,7 +6,8 @@ describe EngagingNetworksRest::Client::Pages do
   let(:host) { 'example.com' }
   let(:api_key) { 'abc-123' }
   let(:ens_auth_key) { 'tmp-auth-key-456' }
-  let(:standard_headers) { { 'Content-Type' => 'application/json', 'Ens-Auth-Token' => ens_auth_key } }
+  let(:standard_headers) { { 'Ens-Auth-Token' => ens_auth_key } }
+  let(:json_headers) { standard_headers.merge('Content-Type' => 'application/json') }
 
   subject { EngagingNetworksRest::Client.new(api_key:, host:) }
 
@@ -77,7 +78,7 @@ describe EngagingNetworksRest::Client::Pages do
         stub_request(:post, page_req_url)
           .with(body: { 'txn1' => 'foo', 'txn2' => 'bar', 'suppressAutoResponder' => true,
                         supporter: { 'lastName' => 'Smith', 'emailAddress' => email } }.to_json,
-                headers: standard_headers)
+                headers: json_headers)
           .to_return(status: '200',
                      headers: { content_type: 'application/json; charset=utf-8' },
                      body: response.to_json)
@@ -91,7 +92,7 @@ describe EngagingNetworksRest::Client::Pages do
 
       it 'should process the page request and return its ID' do
         stub_request(:post, page_req_url)
-          .with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
+          .with(body: { supporter: supporter_hash }.to_json, headers: json_headers)
           .to_return(status: '200',
                      headers: { content_type: 'application/json; charset=utf-8' },
                      body: response.to_json)
@@ -105,7 +106,7 @@ describe EngagingNetworksRest::Client::Pages do
 
       it 'should raise if response status is not SUCCESS' do
         stub_request(:post, page_req_url)
-          .with(body: { supporter: supporter_hash }.to_json, headers: standard_headers)
+          .with(body: { supporter: supporter_hash }.to_json, headers: json_headers)
           .to_return(status: '200',
                      headers: { content_type: 'application/json; charset=utf-8' },
                      body: failure_response.to_json)
