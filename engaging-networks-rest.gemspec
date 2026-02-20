@@ -6,8 +6,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Gem::Specification.new do |spec|
   spec.name          = 'engaging-networks-rest'
   spec.version       = File.read(File.expand_path('VERSION', __dir__)).strip
-  spec.authors       = ['Grey Moore']
-  spec.email         = ['systems@controlshiftlabs.com']
+  spec.authors       = ['Grey Moore', 'Owens Ehimen', 'Diego Marcet']
+  spec.email         = ['talk@controlshiftlabs.com']
 
   spec.summary       = 'Client gem for the ENS API to Engaging Networks'
   spec.description   = 'Client gem for the ENS API to Engaging Networks'
