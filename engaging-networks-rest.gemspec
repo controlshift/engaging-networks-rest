@@ -1,42 +1,38 @@
 # frozen_string_literal: true
 
-Gem::Specification.new do |s|
-  s.name = "engaging-networks-rest".freeze
-  s.version = "1.0.0"
+lib = File.expand_path('lib', __dir__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib".freeze]
-  s.authors = ["Grey Moore".freeze]
-  s.date = "2023-10-17"
-  s.description = "Client gem for the ENS API to Engaging Networks".freeze
-  s.email = "systems@controlshiftlabs.com".freeze
-  s.extra_rdoc_files = [
-    "LICENSE",
-    "LICENSE.txt",
-    "README.md"
-  ]
+Gem::Specification.new do |spec|
+  spec.name          = 'engaging-networks-rest'
+  spec.version       = File.read(File.expand_path('VERSION', __dir__)).strip
+  spec.authors       = ['Grey Moore', 'Owens Ehimen', 'Diego Marcet']
+  spec.email         = ['talk@controlshiftlabs.com']
 
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  s.files         = Dir.chdir(File.expand_path(__dir__)) do
+  spec.summary       = 'Client gem for the ENS API to Engaging Networks'
+  spec.description   = 'Client gem for the ENS API to Engaging Networks'
+  spec.homepage      = 'https://github.com/controlshift/engaging-networks-rest'
+  spec.license       = 'MIT'
+
+  spec.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
+  spec.require_paths = ['lib']
 
-  s.homepage = 'https://github.com/controlshift/engaging-networks-rest'.freeze
-  s.licenses = ["MIT".freeze]
-  s.summary = "Client gem for the ENS API to Engaging Networks".freeze
+  spec.required_ruby_version = ['>= 3.3', '< 5.0']
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
-  end
+  # Runtime dependencies
+  spec.add_runtime_dependency 'faraday', '~> 2.0'
 
-  s.add_runtime_dependency(%q<faraday>.freeze, [">= 1.0"])
-  s.add_runtime_dependency(%q<faraday_middleware>.freeze, [">= 0"])
+  # Development dependencies
+  spec.add_development_dependency 'bundler', '>= 2.0', '< 5.0'
+  spec.add_development_dependency 'debug', '~> 1.0'
+  spec.add_development_dependency 'faker', '~> 3.0'
+  spec.add_development_dependency 'faraday-detailed_logger', '~> 2.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop', '~> 1.0'
+  spec.add_development_dependency 'webmock', '~> 3.0'
 
-  s.add_development_dependency(%q<faker>.freeze, ["> 2.20.0"])
-  s.add_development_dependency(%q<faraday-detailed_logger>.freeze, [">= 2.1.2"])
-  s.add_development_dependency(%q<debug>.freeze, ["> 0"])
-  s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
-  s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
-  s.add_development_dependency(%q<webmock>.freeze, ["> 3.4"])
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

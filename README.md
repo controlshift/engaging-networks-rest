@@ -3,6 +3,11 @@ Client gem for the ENS API to Engaging Networks
 
 [![CI Status](https://github.com/controlshift/engaging-networks-rest/actions/workflows/ci.yml/badge.svg)](https://github.com/controlshift/engaging-networks-rest/actions/workflows/ci.yml)
 
+## Requirements
+
+- Ruby 3.3, 3.4, or 4.0
+- Faraday ~> 2.0
+
 ## Install
 
 `gem install engaging-networks-rest`
